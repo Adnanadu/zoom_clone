@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zoom_clone/core/theme_data/colors.dart';
 import 'package:zoom_clone/feature/auth/view/pages/login_page.dart';
