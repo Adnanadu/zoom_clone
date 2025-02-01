@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginPage> {
               onPressed: () async {
                 bool result = await _authServices.signInWithGoogle(context);
                 if (result && context.mounted) {
-                  Navigator.pushReplacementNamed(context, '/home');
+                  Navigator.pushNamed(context, '/home');
                 }
               }),
         ],

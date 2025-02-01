@@ -11,6 +11,8 @@ class AuthServices {
   /// Instance of FirebaseFirestore to interact with Firestore database.
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  Stream<User?> get authChanges => _auth.authStateChanges();
+
   /// Signs in a user using Google Sign-In.
   Future<bool> signInWithGoogle(BuildContext context) async {
     bool result = false;
