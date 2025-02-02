@@ -1,17 +1,27 @@
+import 'dart:developer';
+
 import 'package:jitsi_meet_flutter_sdk/jitsi_meet_flutter_sdk.dart';
 import 'package:zoom_clone/core/services/auth_services.dart';
+import 'package:zoom_clone/core/services/firestore_services.dart';
 
 class JitsiMeetServices {
-  final AuthServices _authServices = AuthServices();
+  final AuthServices authServices = AuthServices();
   final JitsiMeet jitsiMeet = JitsiMeet();
-
+  final FirestoreServices firestoreServices = FirestoreServices();
   void createNewMeeting({
     required String roomName,
-    bool? isAudioMuted,
-    bool? isVideoMuted,
+    required bool isAudioMuted,
+    required bool isVideoMuted,
+    String userName = '',
   }) async {
-    jitsiMeet.join(
-      JitsiMeetConferenceOptions(
+    try {
+      String name;
+      if (userName.isEmpty) {
+        name = authServices.user.displayName!;
+      } else {
+        name = userName;
+      }
+      var options = JitsiMeetConferenceOptions(
         featureFlags: {
           'chat.enabled': false,
           'invite.enabled': false,
@@ -34,11 +44,16 @@ class JitsiMeetServices {
         },
         serverURL: "https://meet.jit.si",
         userInfo: JitsiMeetUserInfo(
-          avatar: _authServices.user.photoURL,
-          displayName: _authServices.user.displayName,
-          email: _authServices.user.email,
+          avatar: authServices.user.photoURL,
+          displayName: authServices.user.displayName,
+          email: authServices.user.email,
         ),
-      ),
-    );
+      );
+      await jitsiMeet.join(options);
+
+      firestoreServices.addToMeetingHistory(roomName);
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }

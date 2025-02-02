@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:zoom_clone/core/services/auth_services.dart';
+import 'package:zoom_clone/core/services/jitsi_meet_services.dart';
 import 'package:zoom_clone/core/theme_data/colors.dart';
 import 'package:zoom_clone/feature/homePage/view/widgets/meeting_option_widget.dart';
 
@@ -9,8 +10,11 @@ class VideoCallPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    //Controllers
+    //objects
     final AuthServices authServices = AuthServices();
+    final JitsiMeetServices jitsiMeetServices = JitsiMeetServices();
+
+    //Controllers
     final TextEditingController meetinIdController = useTextEditingController();
     final TextEditingController nameController =
         useTextEditingController(text: authServices.user.displayName ?? 'user');
@@ -19,7 +23,8 @@ class VideoCallPage extends HookWidget {
     final onAudioMute = useState<bool>(true);
     final onVideoMute = useState<bool>(true);
 
-    ///Function
+    ///Functions
+    ///
     ///onAudioMute
 
     isAudioMuted(bool val) {
@@ -32,7 +37,14 @@ class VideoCallPage extends HookWidget {
     }
 
     ///Join Meeting
-    joinMeeting() {}
+    joinMeeting() {
+      jitsiMeetServices.createNewMeeting(
+        roomName: meetinIdController.text,
+        isAudioMuted: onAudioMute.value,
+        isVideoMuted: onVideoMute.value,
+        userName: nameController.text,
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(

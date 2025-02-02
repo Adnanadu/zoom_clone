@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
@@ -13,7 +15,7 @@ class AuthServices {
 
   Stream<User?> get authChanges => _auth.authStateChanges();
 
-User get user => _auth.currentUser!;
+  User get user => _auth.currentUser!;
 
   /// Signs in a user using Google Sign-In.
   Future<bool> signInWithGoogle(BuildContext context) async {
@@ -58,5 +60,14 @@ User get user => _auth.currentUser!;
       result = false;
     }
     return result;
+  }
+
+  /// Signs out the current user.
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut();
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }

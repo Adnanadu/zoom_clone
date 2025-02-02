@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:zoom_clone/core/services/auth_services.dart';
 import 'package:zoom_clone/core/theme_data/colors.dart';
 import 'package:zoom_clone/feature/homePage/view/pages/history_meeting_page.dart';
 import 'package:zoom_clone/feature/homePage/view/pages/meeting_page.dart';
+import 'package:zoom_clone/feature/homePage/view/widgets/custom_button_widget.dart';
 
 class HomePage extends HookWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // final AuthServices authServices = AuthServices();
     final currentIndex = useState<int>(0);
 
     final List<Widget> pages = [
@@ -16,7 +19,8 @@ class HomePage extends HookWidget {
       MeetingPage(),
       HistoryMeetingPage(),
       Text("Contacts"),
-      Text("Settings"),
+      CustomButtonWidget(
+          text: 'Log Out', onPressed: () => AuthServices().signOut()),
     ];
 
     void onPageChanged(int pages) {
