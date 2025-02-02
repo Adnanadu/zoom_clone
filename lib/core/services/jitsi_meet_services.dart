@@ -6,8 +6,8 @@ import 'package:zoom_clone/core/services/firestore_services.dart';
 
 class JitsiMeetServices {
   final AuthServices authServices = AuthServices();
-  final JitsiMeet jitsiMeet = JitsiMeet();
   final FirestoreServices firestoreServices = FirestoreServices();
+  final JitsiMeet jitsiMeet = JitsiMeet();
   void createNewMeeting({
     required String roomName,
     required bool isAudioMuted,
@@ -22,7 +22,10 @@ class JitsiMeetServices {
         name = userName;
       }
       var options = JitsiMeetConferenceOptions(
+        room: roomName,
         featureFlags: {
+          'FeatureFlags.resolution': FeatureFlagVideoResolutions.resolution720p,
+          'welcomepage.enabled': false,
           'chat.enabled': false,
           'invite.enabled': false,
           'call-integration.enabled': false,
@@ -34,9 +37,7 @@ class JitsiMeetServices {
           'recording.enabled': false,
           'tile-view.enabled': false,
           'toolbox.alwaysVisible': false,
-          'welcomepage.enabled': false,
         },
-        room: roomName,
         configOverrides: {
           "startWithAudioMuted": isAudioMuted,
           "startWithVideoMuted": isVideoMuted,
@@ -49,9 +50,9 @@ class JitsiMeetServices {
           email: authServices.user.email,
         ),
       );
-      await jitsiMeet.join(options);
-
       firestoreServices.addToMeetingHistory(roomName);
+
+      await jitsiMeet.join(options);
     } catch (e) {
       log(e.toString());
     }

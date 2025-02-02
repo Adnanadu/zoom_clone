@@ -10,7 +10,7 @@ class MeetingPage extends StatelessWidget {
 
   createNewMeeting() async {
     var random = Random();
-    String roomName = "Flutter-${(random.nextInt(100000) + 100000).toString()}";
+    String roomName = (random.nextInt(100000) + 100000).toString();
     jitsiMeetServices.createNewMeeting(
       roomName: roomName,
       isAudioMuted: true,

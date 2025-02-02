@@ -8,7 +8,7 @@ class HistoryMeetingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: FirestoreServices().meetingHistory,
+      stream: FirestoreServices().meetingsHistory,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
@@ -23,7 +23,7 @@ class HistoryMeetingPage extends StatelessWidget {
         return ListView.builder(
           itemBuilder: (context, index) {
             return ListTile(
-              title: Text(
+              title: SelectableText(
                   "roomName: ${(snapshot.data! as dynamic).docs[index]['meetingName']}"),
               subtitle: Text(
                 'Joined on ${DateFormat.yMMMd().format((snapshot.data! as dynamic).docs[index]['createdAt'].toDate())}',
