@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zoom_clone/feature/homePage/view/widgets/custom_button.dart';
+import 'package:zoom_clone/feature/homePage/view/widgets/custom_button_widget.dart';
 import 'package:zoom_clone/core/services/auth_services.dart';
 
 class LoginPage extends StatefulWidget {
@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginPage> {
             padding: const EdgeInsets.symmetric(vertical: 38.0),
             child: Image.asset('assets/images/onboarding.jpg'),
           ),
-          CustomButton(
+          CustomButtonWidget(
               text: 'Google Sign In',
               onPressed: () async {
                 bool result = await _authServices.signInWithGoogle(context);

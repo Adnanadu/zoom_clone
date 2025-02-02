@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zoom_clone/core/theme_data/colors.dart';
+import 'package:zoom_clone/feature/homePage/view/widgets/home_meeting_button_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,7 +27,41 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
       ),
       body: Column(
-        children: [],
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              HomeMeetingButtonWidget(
+                onPressed: () {},
+                text: "New Meeting",
+                icon: Icons.videocam,
+              ),
+              HomeMeetingButtonWidget(
+                onPressed: () {},
+                text: "Join Meeting",
+                icon: Icons.add_box_rounded,
+              ),
+              HomeMeetingButtonWidget(
+                onPressed: () {},
+                text: "Shedule",
+                icon: Icons.calendar_today,
+              ),
+              HomeMeetingButtonWidget(
+                onPressed: () {},
+                text: "Share Screen",
+                icon: Icons.arrow_upward_rounded,
+              ),
+            ],
+          ),
+          Expanded(
+            child: Center(
+              child: Text(
+                "create/Join Meeting with just a click!",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
           backgroundColor: ColorPalette.footerColor,
