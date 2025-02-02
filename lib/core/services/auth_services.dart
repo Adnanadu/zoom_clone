@@ -13,6 +13,8 @@ class AuthServices {
 
   Stream<User?> get authChanges => _auth.authStateChanges();
 
+User get user => _auth.currentUser!;
+
   /// Signs in a user using Google Sign-In.
   Future<bool> signInWithGoogle(BuildContext context) async {
     bool result = false;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zoom_clone/core/theme_data/colors.dart';
-import 'package:zoom_clone/feature/homePage/view/widgets/home_meeting_button_widget.dart';
+import 'package:zoom_clone/feature/homePage/view/pages/history_meeting_page.dart';
+import 'package:zoom_clone/feature/homePage/view/pages/meeting_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,11 +12,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
-  onPageChanged(int index) {
+  onPageChanged(int pages) {
     setState(() {
-      _currentIndex = index;
+      _currentIndex = pages;
     });
   }
+
+  List pages = [
+    MeetingPage(),
+    HistoryMeetingPage(),
+    Text("Contacts"),
+    Text("Settings"),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -26,43 +34,7 @@ class _HomePageState extends State<HomePage> {
         title: Text("Meet & Chat"),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              HomeMeetingButtonWidget(
-                onPressed: () {},
-                text: "New Meeting",
-                icon: Icons.videocam,
-              ),
-              HomeMeetingButtonWidget(
-                onPressed: () {},
-                text: "Join Meeting",
-                icon: Icons.add_box_rounded,
-              ),
-              HomeMeetingButtonWidget(
-                onPressed: () {},
-                text: "Shedule",
-                icon: Icons.calendar_today,
-              ),
-              HomeMeetingButtonWidget(
-                onPressed: () {},
-                text: "Share Screen",
-                icon: Icons.arrow_upward_rounded,
-              ),
-            ],
-          ),
-          Expanded(
-            child: Center(
-              child: Text(
-                "create/Join Meeting with just a click!",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-            ),
-          ),
-        ],
-      ),
+      body: pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
           backgroundColor: ColorPalette.footerColor,
           selectedItemColor: Colors.white,
