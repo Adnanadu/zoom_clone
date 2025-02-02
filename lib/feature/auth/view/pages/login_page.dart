@@ -2,14 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:zoom_clone/feature/homePage/view/widgets/custom_button_widget.dart';
 import 'package:zoom_clone/core/services/auth_services.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LogInPage extends StatelessWidget {
+  LogInPage({super.key});
 
-  @override
-  State<LoginPage> createState() => _LoginScreenState();
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+// }
 
-class _LoginScreenState extends State<LoginPage> {
+// class LoginPage extends StatefulWidget {
+//   const LoginPage({super.key});
+
+//   @override
+//   State<LoginPage> createState() => _LoginScreenState();
+// }
+
+// class _LoginScreenState extends State<LoginPage> {
   final AuthServices _authServices = AuthServices();
   @override
   Widget build(BuildContext context) {

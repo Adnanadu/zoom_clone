@@ -4,6 +4,7 @@ import 'package:zoom_clone/core/services/auth_services.dart';
 import 'package:zoom_clone/core/theme_data/colors.dart';
 import 'package:zoom_clone/feature/auth/view/pages/login_page.dart';
 import 'package:zoom_clone/feature/homePage/view/pages/home_page.dart';
+import 'package:zoom_clone/feature/homePage/view/pages/video_call_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,8 +24,9 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: ColorPalette.backgroundColor,
       ),
       routes: {
-        '/login': (context) => const LoginPage(),
-        '/home': (context) => const HomePage(),
+        '/login': (context) => LogInPage(),
+        '/home': (context) => HomePage(),
+        '/videoCall': (context) => const VideoCallPage(),
       },
       home: StreamBuilder(
         stream: AuthServices().authChanges,
@@ -36,9 +38,9 @@ class MyApp extends StatelessWidget {
               ),
             );
           } else if (snapshot.hasData) {
-            return const HomePage();
+            return HomePage();
           } else {
-            return const LoginPage();
+            return LogInPage();
           }
         },
       ),

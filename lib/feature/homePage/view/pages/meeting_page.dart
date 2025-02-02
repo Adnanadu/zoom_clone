@@ -18,6 +18,10 @@ class MeetingPage extends StatelessWidget {
     );
   }
 
+  joinMeeting(BuildContext context) {
+    Navigator.pushNamed(context, '/videoCall');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,7 +35,7 @@ class MeetingPage extends StatelessWidget {
               icon: Icons.videocam,
             ),
             HomeMeetingButtonWidget(
-              onPressed: () {},
+              onPressed: () => joinMeeting(context),
               text: "Join Meeting",
               icon: Icons.add_box_rounded,
             ),
