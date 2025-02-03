@@ -4,21 +4,6 @@ import 'package:zoom_clone/core/services/auth_services.dart';
 
 class LogInPage extends StatelessWidget {
   LogInPage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
-
-// class LoginPage extends StatefulWidget {
-//   const LoginPage({super.key});
-
-//   @override
-//   State<LoginPage> createState() => _LoginScreenState();
-// }
-
-// class _LoginScreenState extends State<LoginPage> {
   final AuthServices _authServices = AuthServices();
   @override
   Widget build(BuildContext context) {
